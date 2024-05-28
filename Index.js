@@ -3,19 +3,18 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
-const app = express();
 const cors = require('cors');
 const swaggerUI = require('swagger-ui-express');
 const swaggerjsDoc = require('swagger-jsdoc');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 
-app.use(morgan('combined', { stream: accessLogStream }));
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const folder = path.join(__dirname + '/archivos/');
+const folder = path.join(__dirname, '/archivos/');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { cb(null, folder) },
     filename: function (req, file, cb) { cb(null, file.originalname) }
