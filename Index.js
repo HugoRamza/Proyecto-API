@@ -48,7 +48,6 @@ const swaggerOptions = {
     apis: [`${path.join(__dirname, "./Index.js")}`],
 };
 const swaggerDocs = swaggerjsDoc(swaggerOptions);
-
 // Rutas para la documentación de API usando Swagger
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.get("/options", (req, res) => {
