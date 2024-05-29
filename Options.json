@@ -3,7 +3,15 @@
     "info": {
     "title": "Proyecto-API",
     "version": "1.0.0",
-    "description":""
+    "description":"Introducción
+    Esta API está diseñada para gestionar la información de los alumnos en una universidad. Proporciona operaciones CRUD (Crear, Leer, Actualizar y Eliminar) para la entidad DALUMN, que representa a los alumnos de la universidad. La API está construida utilizando Node.js y Express, y está documentada con Swagger para facilitar la interacción y la comprensión de los endpoints disponibles.
+    
+    Funcionalidades
+    Listado de Alumnos: Permite obtener la lista completa de alumnos almacenados en la base de datos.
+    Consulta de Alumno por ID: Permite obtener los detalles de un alumno específico utilizando su ID.
+    Inserción de Nuevo Alumno: Permite agregar un nuevo alumno a la base de datos proporcionando la información necesaria.
+    Actualización de Alumno: Permite actualizar la información de un alumno existente utilizando su ID.
+    Eliminación de Alumno: Permite eliminar un alumno de la base de datos utilizando su ID."
     },
     "servers":[
     {
