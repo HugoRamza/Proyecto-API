@@ -1,3 +1,4 @@
+// Importa los módulos necesarios
 const express = require('express');
 const morgan = require('morgan');
 const fs = require('fs');
@@ -9,11 +10,15 @@ const swaggerjsDoc = require('swagger-jsdoc');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 
+// Inicializa la aplicación Express
 const app = express();
+
+// Middleware para permitir solicitudes CORS y parsear JSON
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Configura multer para subir archivos a la carpeta especificada
 const folder = path.join(__dirname, '/archivos/');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { cb(null, folder) },
@@ -22,6 +27,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 app.use(upload.single('archivo'));
 
+// Configuración de variables de entorno para conexión a MySQL
 const PORT = process.env.PORT || 3001;
 const PORTE = process.env.MYSQLPORT || 3306;
 const HOST = process.env.MYSQLHOST || 'localhost';
@@ -29,23 +35,25 @@ const USER = process.env.MYSQLUSER || 'root';
 const PASSWORD = process.env.MYSQLPASSWORD || '';
 const DATABASE = process.env.MYSQL_DATABASE || 'alumnos';
 
+// Datos de conexión a MySQL
 const MySqlConnection = { host: HOST, user: USER, password: PASSWORD, database: DATABASE, port: PORTE };
 
+// Lee y parsea el archivo de opciones de Swagger
 const data = fs.readFileSync(path.join(__dirname, './Options.json'), { encoding: 'utf8', flag: 'r' });
 const obj = JSON.parse(data);
 
+// Configuración de Swagger
 const swaggerOptions = {
     definition: obj,
     apis: [`${path.join(__dirname, "./Index.js")}`],
 };
-
 const swaggerDocs = swaggerjsDoc(swaggerOptions);
 
+// Rutas para la documentación de API usando Swagger
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.get("/options", (req, res) => {
     res.json(data);
 });
-
 app.use("/api-docs-json", (req, res) => {
     res.json(swaggerDocs);
 });
@@ -132,6 +140,7 @@ app.use("/api-docs-json", (req, res) => {
  *             example:
  *               message: Error en la base de datos.
  */
+// Endpoint para obtener todos los alumnos
 app.get('/Alumno', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
@@ -176,6 +185,7 @@ app.get('/Alumno', async (req, res) => {
  *             example:
  *               message: Error en la base de datos.
  */
+// Endpoint para obtener un alumno por su ID
 app.get('/Alumno/:id', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
@@ -217,6 +227,7 @@ app.get('/Alumno/:id', async (req, res) => {
  *             example:
  *               message: Error al insertar datos.
  */
+// Endpoint para insertar un nuevo alumno
 app.post('/Alumno', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
@@ -263,6 +274,7 @@ app.post('/Alumno', async (req, res) => {
  *             example:
  *               message: Error al actualizar datos.
  */
+// Endpoint para actualizar un alumno por su ID
 app.put('/Alumno/:id', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
@@ -309,6 +321,7 @@ app.put('/Alumno/:id', async (req, res) => {
  *             example:
  *               message: Error al eliminar datos.
  */
+// Endpoint para eliminar un alumno por su ID
 app.delete('/Alumno/:id', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
@@ -323,6 +336,7 @@ app.delete('/Alumno/:id', async (req, res) => {
     }
 });
 
+// Inicia el servidor en el puerto especificado
 app.listen(PORT, () => {
     console.log("Servidor express escuchando en el puerto " + PORT);
 });
