@@ -176,7 +176,7 @@ app.get('/Alumno', async (req, res) => {
  *             example:
  *               message: Error en la base de datos.
  */
-app.get('/dalumn/:id', async (req, res) => {
+app.get('/Alumno/:id', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
         const [rows] = await conn.query('SELECT * FROM DALUMN WHERE aluctr = ?', [req.params.id]);
