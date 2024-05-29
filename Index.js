@@ -144,11 +144,11 @@ app.get('/Alumno', async (req, res) => {
 
 /**
  * @swagger
- * /dalumn/{id}:
+ * /Alumno/{id}:
  *   get:
  *     summary: Obtiene un alumno por ID.
  *     description: Retorna los detalles de un alumno específico según el ID proporcionado.
- *     tags: [DALUMN]
+ *     tags: [Alumno]
  *     parameters:
  *       - in: path
  *         name: id
@@ -162,7 +162,7 @@ app.get('/Alumno', async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/DALUMN'
+ *               $ref: '#/components/schemas/Alumno'
  *       404:
  *         description: No encontrado. El alumno con el ID proporcionado no existe.
  *         content:
