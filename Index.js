@@ -53,12 +53,12 @@ app.use("/api-docs-json", (req, res) => {
 /**
  * @swagger
  * tags:
- *   name: DALUMN
- *   description: Operaciones relacionadas con DALUMN
+ *   name: Alumno
+ *   description: Operaciones relacionadas con Alumnos
  *
  * components:
  *   schemas:
- *     DALUMN:
+ *     Alumno:
  *       type: object
  *       required:
  *         - aluctr
@@ -111,11 +111,11 @@ app.use("/api-docs-json", (req, res) => {
 
 /**
  * @swagger
- * /dalumn:
+ * /Alumno:
  *   get:
  *     summary: Obtiene la lista de alumnos.
  *     description: Retorna la lista completa de alumnos almacenados en la base de datos.
- *     tags: [DALUMN]
+ *     tags: [Alumno]
  *     responses:
  *       200:
  *         description: Éxito. Retorna la lista de alumnos.
@@ -124,7 +124,7 @@ app.use("/api-docs-json", (req, res) => {
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/DALUMN'
+ *                 $ref: '#/components/schemas/Alumno'
  *       500:
  *         description: Error interno del servidor.
  *         content:
@@ -132,7 +132,7 @@ app.use("/api-docs-json", (req, res) => {
  *             example:
  *               message: Error en la base de datos.
  */
-app.get('/dalumn', async (req, res) => {
+app.get('/Alumno', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
         const [rows] = await conn.query('SELECT * FROM DALUMN');
@@ -192,17 +192,17 @@ app.get('/dalumn/:id', async (req, res) => {
 
 /**
  * @swagger
- * /dalumn:
+ * /Alumno:
  *   post:
  *     summary: Inserta un nuevo alumno.
  *     description: Inserta un nuevo alumno en la base de datos con la información proporcionada.
- *     tags: [DALUMN]
+ *     tags: [Alumno]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/DALUMN'
+ *             $ref: '#/components/schemas/Alumno'
  *     responses:
  *       200:
  *         description: Éxito. Datos insertados correctamente.
@@ -217,7 +217,7 @@ app.get('/dalumn/:id', async (req, res) => {
  *             example:
  *               message: Error al insertar datos.
  */
-app.post('/dalumn', async (req, res) => {
+app.post('/Alumno', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
         const { aluctr, aluapp, aluapm, alunom, alusex, alunac, alulna, alurfc, alucur, aluesc, alumai } = req.body;
@@ -231,11 +231,11 @@ app.post('/dalumn', async (req, res) => {
 
 /**
  * @swagger
- * /dalumn/{id}:
+ * /Alumno/{id}:
  *   put:
  *     summary: Actualiza un alumno por ID.
  *     description: Actualiza la información de un alumno específico según el ID proporcionado.
- *     tags: [DALUMN]
+ *     tags: [Alumno]
  *     parameters:
  *       - in: path
  *         name: id
@@ -248,7 +248,7 @@ app.post('/dalumn', async (req, res) => {
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/DALUMN'
+ *             $ref: '#/components/schemas/Alumno'
  *     responses:
  *       200:
  *         description: Éxito. Alumno actualizado correctamente.
@@ -263,7 +263,7 @@ app.post('/dalumn', async (req, res) => {
  *             example:
  *               message: Error al actualizar datos.
  */
-app.put('/dalumn/:id', async (req, res) => {
+app.put('/Alumno/:id', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
         const { aluapp, aluapm, alunom, alusex, alunac, alulna, alurfc, alucur, aluesc, alumai } = req.body;
@@ -277,11 +277,11 @@ app.put('/dalumn/:id', async (req, res) => {
 
 /**
  * @swagger
- * /dalumn/{id}:
+ * /Alumno/{id}:
  *   delete:
  *     summary: Elimina un alumno por ID.
  *     description: Elimina un alumno específico según el ID proporcionado.
- *     tags: [DALUMN]
+ *     tags: [Alumno]
  *     parameters:
  *       - in: path
  *         name: id
@@ -309,7 +309,7 @@ app.put('/dalumn/:id', async (req, res) => {
  *             example:
  *               message: Error al eliminar datos.
  */
-app.delete('/dalumn/:id', async (req, res) => {
+app.delete('/Alumno/:id', async (req, res) => {
     try {
         const conn = await mysql.createConnection(MySqlConnection);
         const [result] = await conn.query('DELETE FROM DALUMN WHERE aluctr = ?', [req.params.id]);
